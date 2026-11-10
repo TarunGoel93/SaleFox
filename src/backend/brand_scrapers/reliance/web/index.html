@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reliance Digital Pro Intelligence — Mobile Handset & Pricing Scraper</title>
+  <meta name="description" content="Ultra-modern Frosted Glassmorphism Intelligence Scraper & Pricing Dashboard for Reliance Digital smartphones.">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="style.css?v=3.5">
+</head>
+<body>
+
+  <!-- Main Floating Glass Window -->
+  <div class="growth-app-window">
+    <main class="growth-main-canvas">
+
+      <!-- Top Header Bar (100% Reliance Digital Focused) -->
+      <header class="growth-top-header">
+        <div class="header-branding">
+          <div class="rd-logo-badge">
+            <div class="rd-logo-icon">
+              <i data-lucide="smartphone"></i>
+            </div>
+            <div class="rd-brand-text">
+              <div class="rd-brand-row">
+                <span class="rd-brand-name">Reliance Digital</span>
+                <span class="rd-badge-stealth">PRO INTELLIGENCE</span>
+              </div>
+              <p class="rd-tagline">Real-Time Mobile Handset, Stock Deliverability & Pricing Scraper</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <div class="pincode-pill" id="pincodeDisplayPill" title="Active Delivery Pincode">
+            <i data-lucide="map-pin" class="pill-icon"></i>
+            <span class="pincode-label">PIN:</span>
+            <span class="pincode-val" id="activePincodeText">110058</span>
+          </div>
+
+          <div class="server-status-pill" id="serverStatusBadge">
+            <span class="status-dot"></span>
+            <span id="serverStatusText">ENGINE READY</span>
+          </div>
+
+          <button type="button" class="btn-export-pill" id="btnExportCsv" title="Export CSV Report">
+            <i data-lucide="file-spreadsheet" class="btn-icon"></i>
+            <span>Export CSV</span>
+          </button>
+
+          <button type="button" class="btn-export-pill outline" id="btnExportJson" title="Export JSON Dataset">
+            <i data-lucide="file-code" class="btn-icon"></i>
+            <span>JSON</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Three Executive Widgets Row (Figma Frosted Glass Style, Pure Reliance Digital Metrics) -->
+      <section class="executive-widgets-grid">
+
+        <!-- Widget 1: Obsidian Dark Hero Card -->
+        <div class="exec-card card-dark-obsidian">
+          <div class="exec-card-header">
+            <span class="card-title-text">Catalog Overview & Stock Health</span>
+            <div class="card-header-icons">
+              <button type="button" class="icon-btn-ghost" title="Live Sync"><i data-lucide="refresh-cw"></i></button>
+              <button type="button" class="icon-btn-ghost" title="Options"><i data-lucide="more-vertical"></i></button>
+            </div>
+          </div>
+
+          <div class="hero-stats-row">
+            <div class="stat-col">
+              <div class="stat-big-num" id="metricTotalHandsets">0</div>
+              <div class="stat-caption" id="metricTotalSubtitle">In-Stock Handsets Online</div>
+            </div>
+            <div class="stat-col">
+              <div class="stat-big-num" id="widgetTotalHandsets">0</div>
+              <div class="stat-caption">Total Handset Variants Found</div>
+            </div>
+          </div>
+
+          <div class="obsidian-progress-track">
+            <div class="obsidian-progress-bar" id="widgetTrackBar" style="width: 0%;"></div>
+          </div>
+
+          <div class="obsidian-pills-row">
+            <div class="inset-pill-item">
+              <div class="pill-icon-circle green"><i data-lucide="check-circle-2"></i></div>
+              <div class="pill-stat-num" id="widgetInStockCount">0</div>
+              <div class="pill-stat-label">In Stock Online</div>
+            </div>
+
+            <div class="inset-pill-item">
+              <div class="pill-icon-circle red"><i data-lucide="alert-circle"></i></div>
+              <div class="pill-stat-num" id="widgetOutOfStockCount">0</div>
+              <div class="pill-stat-label">Out of Stock</div>
+            </div>
+
+            <div class="inset-pill-item">
+              <div class="pill-icon-circle blue"><i data-lucide="shield-check"></i></div>
+              <div class="pill-stat-num">100%</div>
+              <div class="pill-stat-label">Stock Verified</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Widget 2: Frosted Translucent Card (Lowest Price & Market Pulse) -->
+        <div class="exec-card card-frosted-chart">
+          <div class="exec-card-header">
+            <span class="card-title-text">Pricing & Discount Intelligence</span>
+            <div class="chart-header-badge">
+              <i data-lucide="trending-down"></i>
+            </div>
+          </div>
+
+          <div class="price-highlight-box">
+            <div class="price-highlight-main">
+              <span class="price-sub-caption">Lowest Variant Price</span>
+              <div class="price-hero-val" id="metricLowestPrice">₹0</div>
+              <span class="price-hero-model" id="metricLowestModel">—</span>
+            </div>
+          </div>
+
+          <!-- Minimalist Vector Wave Graphic -->
+          <div class="vector-wave-container">
+            <svg class="wave-chart-svg" viewBox="0 0 320 100" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="waveFillGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#0e1015" stop-opacity="0.12"/>
+                  <stop offset="100%" stop-color="#0e1015" stop-opacity="0.0"/>
+                </linearGradient>
+              </defs>
+              <path d="M 0 75 Q 35 25, 70 55 T 140 70 T 210 20 T 280 60 T 320 40 L 320 100 L 0 100 Z" fill="url(#waveFillGrad)"/>
+              <path d="M 0 75 Q 35 25, 70 55 T 140 70 T 210 20 T 280 60 T 320 40" fill="none" stroke="#12141a" stroke-width="2.4" stroke-linecap="round"/>
+              
+              <!-- Indicator Tooltip Callout on Peak -->
+              <g transform="translate(208, 12)">
+                <rect x="-24" y="-14" width="48" height="18" rx="4" fill="#0f1117"/>
+                <text x="0" y="-2" fill="#fff" font-size="9" font-family="'Outfit', sans-serif" font-weight="700" text-anchor="middle">BEST DEAL</text>
+                <circle cx="0" cy="12" r="3" fill="#0f1117"/>
+              </g>
+            </svg>
+          </div>
+
+          <div class="chart-legend-row">
+            <span class="legend-tag"><span class="legend-dot in-stock"></span> In Stock Online</span>
+            <span class="legend-tag"><span class="legend-dot oos"></span> Unavailable Online</span>
+          </div>
+        </div>
+
+        <!-- Widget 3: White Radial Progress (Stock Availability Ratio) -->
+        <div class="exec-card card-white-radial">
+          <div class="exec-card-header">
+            <span class="card-title-text">Online Stock Deliverability</span>
+            <button type="button" class="icon-btn-ghost"><i data-lucide="arrow-up-right"></i></button>
+          </div>
+
+          <div class="month-comparison-tag">
+            <strong id="widgetMonthPct">0%</strong> variants deliverable for PIN <span id="widgetPinDisplay">110058</span>
+          </div>
+
+          <div class="radial-overview-body">
+            <div class="radial-metrics-stack">
+              <div class="radial-metric-row">
+                <span class="metric-mini-label">AVERAGE PRICE</span>
+                <span class="metric-mini-val text-blue" id="metricAvgPrice">₹0</span>
+              </div>
+              <div class="radial-metric-row">
+                <span class="metric-mini-label">MAX DISCOUNT</span>
+                <span class="metric-mini-val text-violet" id="metricMaxDiscount">0%</span>
+              </div>
+            </div>
+
+            <!-- Radial Progress Ring -->
+            <div class="radial-ring-wrap">
+              <svg class="ring-svg" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" class="ring-bg-track"/>
+                <circle cx="50" cy="50" r="40" class="ring-fill-bar" id="ringFillBar" stroke-dasharray="251.2" stroke-dashoffset="251.2"/>
+              </svg>
+              <div class="ring-center-value">
+                <span class="ring-num" id="ringPercentageText">0%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="radial-card-actions">
+            <button type="button" class="btn-download-report" id="btnDownloadReportAction" onclick="document.getElementById('btnExportCsv').click();" title="Download Handsets CSV">
+              <i data-lucide="download" class="btn-icon"></i>
+              <span>Download CSV Report</span>
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Scraper Search & Natural Control Bar -->
+      <section class="growth-search-section">
+        <form id="scrapeForm" class="growth-scrape-form" onsubmit="return false;">
+          <div class="search-pill-container">
+            <div class="search-input-box">
+              <i data-lucide="search" class="search-magnifier-icon"></i>
+              <input 
+                type="text" 
+                id="queryInput" 
+                class="growth-search-field" 
+                placeholder="Search phone model (e.g. 'iPhone 15', 'OnePlus 13', 'Samsung Galaxy S26', '5G under 20k')..." 
+                autocomplete="off"
+                value="iPhone 15"
+              >
+              <div class="search-badges-preview" id="searchBadgesPreview"></div>
+              <button type="button" class="clear-btn" id="clearSearchBtn" title="Clear">
+                <i data-lucide="x"></i>
+              </button>
+            </div>
+
+            <div class="search-config-row">
+              <div class="pill-input-group" title="Delivery Pincode">
+                <i data-lucide="map-pin" class="pill-icon"></i>
+                <input type="text" id="pincodeInput" class="pill-text-input" value="110058" maxlength="6" placeholder="Pincode">
+              </div>
+
+              <div class="pill-input-group" title="Pages to scan">
+                <i data-lucide="layers" class="pill-icon"></i>
+                <select id="pagesSelect" class="pill-select-input">
+                  <option value="1">1 Page (~18)</option>
+                  <option value="2" selected>2 Pages (~36)</option>
+                  <option value="4">4 Pages (~72)</option>
+                  <option value="6">6 Pages (~108)</option>
+                </select>
+              </div>
+
+              <label class="growth-toggle-label" title="Filter out out-of-stock phones">
+                <input type="checkbox" id="inStockToggle">
+                <span class="growth-switch-track"></span>
+                <span class="switch-text">In-Stock Only</span>
+              </label>
+
+              <button type="submit" id="btnExecuteScrape" class="btn-dark-launch">
+                <i data-lucide="zap" class="launch-icon"></i>
+                <span>LAUNCH SCRAPER</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Target Chips -->
+          <div class="quick-targets-row">
+            <span class="targets-caption"><i data-lucide="sparkles" class="sparkle-icon"></i> Quick Targets:</span>
+            <div class="targets-chips-wrap">
+              <button type="button" class="preset-chip active" data-query="iPhone 15">iPhone 15</button>
+              <button type="button" class="preset-chip" data-query="OnePlus 13">OnePlus 13</button>
+              <button type="button" class="preset-chip" data-query="Samsung Galaxy S26">Samsung Galaxy S26</button>
+              <button type="button" class="preset-chip" data-query="OnePlus Nord CE6 Lite">OnePlus Nord CE6 Lite</button>
+              <button type="button" class="preset-chip" data-query="5G Phones Under 20k">5G Phones Under 20k</button>
+              <button type="button" class="preset-chip" data-query="POCO 5G under 18000">POCO &lt; 18k</button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Real-Time Progress Panel -->
+        <div class="progress-panel" id="progressPanel">
+          <div class="progress-header">
+            <div class="progress-title-wrap">
+              <span class="radar-scan-icon"></span>
+              <span class="progress-title" id="progressStatusText">Engine Idle</span>
+            </div>
+            <span class="progress-percentage" id="progressPercentageText">0%</span>
+          </div>
+          
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="progressBarFill" style="width: 0%;"></div>
+          </div>
+
+          <div class="console-box" id="consoleBox">
+            <div class="console-header">
+              <span class="console-tab"><i data-lucide="terminal" class="tab-icon"></i> LIVE STREAM LOGS</span>
+              <span class="console-autoscroll">Auto-scroll Active</span>
+            </div>
+            <div class="console-stream" id="consoleStream">
+              <div class="log-line info">[00:00:00] Pro Intelligence Engine ready. Awaiting scrape trigger.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Handset Catalog Explorer -->
+      <section class="growth-catalog-explorer">
+        <div class="explorer-top-bar">
+          <div class="brand-filter-group" id="brandFilterContainer">
+            <button type="button" class="brand-pill active" data-brand="all">All (0)</button>
+          </div>
+
+          <div class="view-controls">
+            <div class="local-search-wrap">
+              <i data-lucide="filter" class="local-search-icon"></i>
+              <input type="text" id="localFilterInput" class="local-search-input" placeholder="Filter variants (RAM, ROM, color)...">
+            </div>
+
+            <div class="sort-wrap">
+              <i data-lucide="arrow-down-up" class="sort-icon"></i>
+              <select id="sortSelect" class="sort-select">
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="discount-desc">Highest Discount %</option>
+                <option value="rating-desc">Highest Rating</option>
+              </select>
+            </div>
+
+            <div class="view-switcher">
+              <button type="button" class="view-btn active" id="viewBtnGrid" title="Grid Card View">
+                <i data-lucide="layout-grid"></i>
+              </button>
+              <button type="button" class="view-btn" id="viewBtnTable" title="Data Table View">
+                <i data-lucide="table"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Products Display Container -->
+        <div id="resultsContainer" class="results-container">
+          <!-- Grid View (Default) -->
+          <div id="productGrid" class="product-grid"></div>
+
+          <!-- Table View (Hidden by default) -->
+          <div id="productTableWrapper" class="product-table-wrapper" style="display: none;">
+            <table class="growth-table">
+              <thead>
+                <tr>
+                  <th>Thumbnail</th>
+                  <th>Product Title & Model</th>
+                  <th>Brand</th>
+                  <th>Live Price</th>
+                  <th>MRP</th>
+                  <th>Discount</th>
+                  <th>Availability</th>
+                  <th>Specs</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="productTableBody"></tbody>
+            </table>
+          </div>
+
+          <!-- Empty State View -->
+          <div id="emptyState" class="empty-state" style="display: none;">
+            <div class="empty-icon-wrap">
+              <i data-lucide="shield-alert" class="empty-icon"></i>
+            </div>
+            <h3 class="empty-title">No Matching Handsets Found</h3>
+            <p class="empty-desc" id="emptyDescText">
+              Reliance Digital's live store may currently be out of stock for this exact handset variant, or it has been superseded by newer releases.
+            </p>
+            <div class="empty-actions">
+              <button class="btn-preset-pill" onclick="applyPreset('iPhone 15')">Try 'iPhone 15'</button>
+              <button class="btn-preset-pill" onclick="applyPreset('OnePlus 13')">Try 'OnePlus 13'</button>
+              <button class="btn-preset-pill" onclick="applyPreset('5G Phones Under 20k')">Try '5G Under 20k'</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom Status Footer -->
+      <footer class="growth-footer">
+        <div class="footer-left">
+          <strong>Reliance Digital Pro Intelligence</strong> &bull; Stealth Mobile Handset & Real-Time Pricing Scraper
+        </div>
+        <div class="footer-right">
+          <span>Dual Fetching Architecture: Turbo JSON API + Stealth Chrome Fallback</span> &bull; <span>Port: 5050</span>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+  <script src="app.js?v=3.5"></script>
+</body>
+</html>
